@@ -11,8 +11,11 @@ root="$(git rev-parse --show-toplevel)"
 cd "$root" || exit 1
 
 # Take all files that have been added, run mix format if they are in lib or test
-files=$(git diff --name-only --cached)
-mix format --check-equivalent mix.exs "lib/**/*.{ex,exs}" "test/**/*.{ex,exs}"
-echo "$files" | awk -v prefix="$root" '{print prefix"/"$0}' | xargs git add
+files=$(git diff --name-only --cached --diff-filter=ACM "mix.exs" "lib/**.ex" "test/**.ex" "lib/**.exs" "test/**.exs")
+
+echo "$files" | xargs mix format --check-equivalent
+echo "$files" | xargs git add
 
 cd "$cwd" || exit 1
+
+exit 0
