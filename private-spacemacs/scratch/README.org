@@ -1,0 +1,51 @@
+#+TITLE: scratch layer
+
+# The maximum height of the logo should be 200 pixels.
+[[img/scratch.png]]
+
+# TOC links should be GitHub style anchors.
+* Table of Contents                                        :TOC_4_gh:noexport:
+- [[#anatomy-of-a-layer][Anatomy of a layer]]
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Anatomy of a layer
+:PROPERTIES:
+:CUSTOM_ID: anatomy-of-a-layer
+:END:
+A layer is simply a folder somewhere in Spacemacs' layer search path that
+usually contains these files (listed in loading order).
+
+- =layers.el= :: declare additional layers
+- =packages.el= :: the packages list and configuration
+- =funcs.el= :: all functions used in the layer should be declared here
+- =config.el= :: layer specific configuration
+- =keybindings.el= :: general key bindings
+
+Additionally, for each local package (see the next section), there should be a
+folder =<layer>/local/<package>/= containing the source code for that package.
+Before initializing that package, Spacemacs will add this folder to the load
+path for you.
+
+For additional reading see [[file:~/.emacs.d/doc/LAYERS.org::*Anatomy of a layer][Anatomy of a layer]]  
+
+* Description
+This layer does wonderful things:
+  - thing01
+
+* Install
+To use this configuration layer, add it to your =~/.spacemacs=. You will need to
+add =scratch= to the existing =dotspacemacs-configuration-layers= list in this
+file.
+
+* Key bindings
+
+| Key Binding | Description    |
+|-------------+----------------|
+| ~SPC x x x~ | Does thing01   |
+# Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
+# Examples:
+# [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
+# [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Bfun/emoji/README.org][Link to Emoji layer README.org]]
+# If space-doc-mode is enabled, Spacemacs will open a local copy of the linked file.
