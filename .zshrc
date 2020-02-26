@@ -109,6 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 function e () { emacsclient -c -n -a "" "$@" & }
 
-. $HOME/.asdf/asdf.sh
+export PATH="$HOME/.asdf/bin:$PATH"
 
-. $HOME/.asdf/completions/asdf.bash
+eval "$(asdf exec direnv hook zsh)"

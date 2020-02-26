@@ -1,7 +1,7 @@
 #+TITLE: scratch layer
 
 # The maximum height of the logo should be 200 pixels.
-[[img/scratch.png]]
+[[img/exosomatic.png]]
 
 # TOC links should be GitHub style anchors.
 * Table of Contents                                        :TOC_4_gh:noexport:
@@ -36,7 +36,7 @@ This layer does wonderful things:
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
-add =scratch= to the existing =dotspacemacs-configuration-layers= list in this
+add =exosomatic= to the existing =dotspacemacs-configuration-layers= list in this
 file.
 
 * Key bindings

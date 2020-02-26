@@ -1,4 +1,4 @@
-;;; packages.el --- scratch layer packages file for Spacemacs.
+;;; packages.el --- exosomatic layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -18,20 +18,23 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `scratch-packages'. Then, for each package PACKAGE:
+;; added to `exosomatic-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `scratch/init-PACKAGE' to load and initialize the package.
+;;   function `exosomatic/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `scratch/pre-init-PACKAGE' and/or
-;;   `scratch/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `exosomatic/pre-init-PACKAGE' and/or
+;;   `exosomatic/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst scratch-packages
-  '()
-  "The list of Lisp packages required by the scratch layer.
+(defconst exosomatic-packages
+  '(
+    direnv
+    drag-stuff
+    )
+  "The list of Lisp packages required by the exosomatic layer.
 
 Each entry is either:
 
@@ -57,6 +60,19 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun exosomatic/init-direnv ()
+  (use-package direnv
+    :config
+    (direnv-mode)
+    :custom
+    (direnv-show-paths-in-summary nil)))
+
+(defun exosomatic/init-drag-stuff ()
+  (use-package drag-stuff
+    :config
+    (drag-stuff-global-mode 1)
+    (drag-stuff-define-keys)))
 
 
 ;;; packages.el ends here
