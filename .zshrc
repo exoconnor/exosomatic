@@ -104,11 +104,17 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
+# NOTE: might want to do all this in an importable file to share with profile and
+# bash
+
+# TODO: fix frame choice and ensure editor can use e
 function e () { emacsclient -c -n -a "" "$@" & }
+EDITOR="vim"
 
-export PATH="$HOME/.asdf/bin:$PATH"
+alias jvisualvm='~/lib/jvisualvm/bin/visualvm'
 
+# ls + show filesize
+alias lt='du -sh * | sort -h'
+
+# Activate direnv
 eval "$(asdf exec direnv hook zsh)"
