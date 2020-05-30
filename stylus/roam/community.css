@@ -1,0 +1,137 @@
+/* If you copy this, keep the malcolmocean one and the metaroam one, as these are both public roams */	
+/* but change the other ones for your personal roam(s) */
+@-moz-document url-prefix("https://roamresearch.com/#/app/metaroam") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        content: "metaroam";
+        white-space: nowrap;
+    }
+    .roam-sidebar-content {background: #593b00;}
+    .roam-topbar {background: #ffbb0033}
+}
+
+@-moz-document url-prefix("https://roamresearch.com/#/app/metatherapy") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        content: "metatherapy";
+    }
+    .roam-sidebar-content {background: #361459;}
+    .roam-topbar {background: #70009d33}
+}
+
+@-moz-document url-prefix("https://roamresearch.com/#/app/lsa") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        content: "LSA 🚀";
+        white-space: nowrap;
+    }
+    .roam-sidebar-content {background: #143659;}
+    .roam-topbar {background: #00709d33}
+}
+
+@-moz-document url-prefix("https://roamresearch.com/#/app/complice") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        content: "complice";
+        white-space: nowrap;
+    }
+
+    .roam-sidebar-content {background: #143314;}
+    .roam-topbar {background: #0f02}
+}
+
+@-moz-document url("https://roamresearch.com/#/app/malcolm"), url-prefix("https://roamresearch.com/#/app/malcolm/") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        content: "malcolm";
+        white-space: nowrap;
+    }
+
+    .roam-sidebar-content {background: #312;}
+    .roam-topbar {background: #b5003d22}
+}
+
+@-moz-document url-prefix("https://roamresearch.com/#/app/malcolmocean") {
+    .roam-sidebar-content > .flex-h-box:first-child:after {
+        color: white;
+        padding-left: 10px;
+    }
+    .roam-topbar .flex-h-box > div:nth-child(2) {
+        padding-left: 30px;
+    }
+
+    .roam-sidebar-content > .flex-h-box:first-child:after,
+    .roam-topbar .flex-h-box > div:nth-child(2):after {
+        /*    content: "malcolmocean";*/
+        content: "";
+        display: inline-block;
+        position: relative;
+        
+        width: 100px;
+        height: 25px;
+        background: url(https://malcolmocean.com/wp-content/themes/minx/img/logo.png) center no-repeat;
+        background-size: 100px 25px;
+        padding-left: 10px;
+        margin-left: 10px;
+    }
+    .roam-topbar .rc-h-box > div:nth-child(3):after {
+        top: 2px;
+    }
+
+    .roam-sidebar-content {background: #591420;}
+    .roam-topbar {background: #f2c6ce}
+
+    .roam-sidebar-content {
+        background: url(https://malcolmocean.com/wp-content/themes/minx/img/footer.png);
+        background-position: center bottom;
+    }
+    .roam-topbar {
+        background: url(https://malcolmocean.com/wp-content/themes/minx/img/header.png);
+        background-size: 710px;
+        box-shadow: 0 1.5px 4px rgba(0,0,0,0.7)
+    }
+
+    .roam-topbar .bp3-button:not([class*="bp3-intent-"])::before {
+        color: black
+    }
+}
