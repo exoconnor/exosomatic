@@ -30,33 +30,35 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(;; emacs
+     better-defaults
+     exosomatic
+     ivy
+     multiple-cursors
+     ;; These will all significantly increase the noise in a buffer,
+     ;; want to fine tune a bit before activating
+     ;; TODO ------------------------------------
+     ;; auto-completion
+     ;; syntax-checking ;; (flycheck)
+     ;; spell-checking
+
+     ;; Language modes
+     ;; Use Elixir lsp, not elixir layer, might be a bit of config
+     html
      csv
+     emacs-lisp
      javascript
      clojure
-     exosomatic
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     docker
-     ivy
-     ;; auto-completion
-     better-defaults
-     emacs-lisp
-     git
+     java
      markdown
-     multiple-cursors
+     docker
      org
+     ;; Toolchain interaction
+     git
+     lsp
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; Spell checking and syntax checking will be added, but first let's get to the point
-     ;; we have spelling and syntax
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -318,8 +320,12 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq evil-want-fine-undo 'fine)
+  ;; New undo state on cursor move in repl 
+  (setq evil-want-fine-undo t)
   (setq vc-follow-symlinks t)
+  ;; cider error buffer is a noisy pain, need to find a way
+  ;; to show only in minibuffer, but until then, don't steal focus
+  (setq cider-auto-select-error-buffer nil)
   (add-hook 'prog-mode-hook 'linum-mode)
   )
 
@@ -341,3 +347,25 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(direnv-show-paths-in-summary nil)
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data company add-node-modules-path csv-mode direnv drag-stuff web-beautify livid-mode skewer-mode simple-httpd js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections multiple-cursors paredit yasnippet cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help org-projectile org-pomodoro alert log4e magit-gitflow evil-magit unfill smeargle orgit org-category-capture org-present gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-popup htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit git-commit with-editor transient spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent ace-window ace-link avy))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
