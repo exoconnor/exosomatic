@@ -109,12 +109,16 @@ source $ZSH/oh-my-zsh.sh
 
 # TODO: fix frame choice and ensure editor can use e
 function e () { emacsclient -c -n -a "" "$@" & }
-EDITOR="vim"
+export EDITOR="vim"
+export GIT_EDITOR="vim"
 
 alias jvisualvm='~/lib/jvisualvm/bin/visualvm'
 
 # ls + show filesize
 alias lt='du -sh * | sort -h'
+
+# react native
+alias rn='npx react-native'
 
 # Activate direnv
 eval "$(asdf exec direnv hook zsh)"
