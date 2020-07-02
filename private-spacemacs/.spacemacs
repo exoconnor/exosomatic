@@ -31,6 +31,12 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(;; emacs
+     (auto-completion :variables
+                      auto-completion-idle-delay 0.6
+                      auto-completion-return-key-behavior nil
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-minimum-prefix-length 1
+                      auto-completion-enable-sort-by-usage t)
      better-defaults
      exosomatic
      ivy
@@ -38,24 +44,41 @@ values."
      ;; These will all significantly increase the noise in a buffer,
      ;; want to fine tune a bit before activating
      ;; TODO ------------------------------------
-     ;; auto-completion
      ;; syntax-checking ;; (flycheck)
      ;; spell-checking
 
      ;; Language modes
      ;; Use Elixir lsp, not elixir layer, might be a bit of config
      html
-     csv
      emacs-lisp
-     javascript
+
+     (javascript :variables
+                 javascript-backend 'lsp
+                 javascript-fmt-tool 'prettier
+                 javascript-fmt-on-save t
+                 js2-basic-offset 2
+                 js-indent-level 2
+                 js2-mode-show-parse-errors nil)
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'prettier
+                 typescript-indent-level 2
+                 typescript-backend 'lsp
+                 typescript-lsp-linter nil)
+     react
+     prettier
+
      clojure
      java
-     markdown
+
      docker
+     markdown
+     csv
      org
      ;; Toolchain interaction
      git
-     lsp
+     (lsp :variables
+          lsp-flycheck-live-reporting nil)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -137,8 +160,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(solarized-light
+                         solarized-dark
+                         spacemacs-dark
+                         monokai)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -270,7 +295,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -287,7 +312,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -326,7 +351,6 @@ you should place your code here."
   ;; cider error buffer is a noisy pain, need to find a way
   ;; to show only in minibuffer, but until then, don't steal focus
   (setq cider-auto-select-error-buffer nil)
-  (add-hook 'prog-mode-hook 'linum-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -361,11 +385,11 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data company add-node-modules-path csv-mode direnv drag-stuff web-beautify livid-mode skewer-mode simple-httpd js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections multiple-cursors paredit yasnippet cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help org-projectile org-pomodoro alert log4e magit-gitflow evil-magit unfill smeargle orgit org-category-capture org-present gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-popup htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit git-commit with-editor transient spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent ace-window ace-link avy))))
+    (tide typescript-mode import-js grizzl add-node-modules-path csv-mode direnv drag-stuff web-beautify livid-mode skewer-mode simple-httpd js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections multiple-cursors paredit yasnippet cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help org-projectile org-pomodoro alert log4e magit-gitflow evil-magit unfill smeargle orgit org-category-capture org-present gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-popup htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit git-commit with-editor transient spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:foreground "#657b83" :background "#fdf6e3")))))
 )
