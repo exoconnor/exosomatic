@@ -120,5 +120,5 @@ alias lt='du -sh * | sort -h'
 # react native
 alias rn='npx react-native'
 
-# Activate direnv
-eval "$(asdf exec direnv hook zsh)"
+eval "$(direnv hook zsh)"
+

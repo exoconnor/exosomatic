@@ -1,29 +1,4 @@
-@-moz-document domain("roamresearch.com") {
-    /*
-div, textarea {
-  font-family: 'azo-sans-web-normal';
-}
-/*
-.roam-block-container {
-    max-width: 1000px;
-}
-.roam-block {
-    max-width: 750px;
-}
-/**/
-}
-
-@-moz-document domain("roamresearch.com") {
-    .checkmark {
-        background: #0ff;
-    }
-    .check-container input:checked ~ .checkmark {
-        background: #ddd;
-    }
-    .check-container input:checked ~ .checkmark:after {
-        border-color: black;
-    }
-}
+/* Need to create my own styles this is nice ref though */
 
 @-moz-document domain("roamresearch.com") {
 

@@ -33,6 +33,7 @@
   '(
     direnv
     drag-stuff
+    nix-mode
     )
   "The list of Lisp packages required by the exosomatic layer.
 
@@ -73,6 +74,10 @@ Each entry is either:
     :config
     (drag-stuff-global-mode 1)
     (drag-stuff-define-keys)))
+
+(defun exosomatic/init-nix-mode ()
+  (use-package nix-mode
+    :mode "\\.nix\\'"))
 
 
 ;;; packages.el ends here
