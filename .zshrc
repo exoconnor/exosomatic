@@ -120,5 +120,7 @@ alias lt='du -sh * | sort -h'
 # react native
 alias rn='npx react-native'
 
+export PATH="$PATH:/home/ckwilson/.asdf/bin"
+source "/home/ckwilson/.asdf/lib/asdf.sh"
+direnv() {asdf exec direnv "$@";}
 eval "$(direnv hook zsh)"
-
