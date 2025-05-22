@@ -30,12 +30,12 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
-     ;; emacs
+   '(yaml
+     ;; Emacs layers
      (auto-completion :variables
                       auto-completion-idle-delay 0.6
                       auto-completion-return-key-behavior nil
-                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
                       auto-completion-minimum-prefix-length 1
                       auto-completion-enable-sort-by-usage t)
      better-defaults
@@ -49,9 +49,12 @@ values."
      ;; spell-checking
 
      ;; Language modes
-     ;; Use Elixir lsp, not elixir layer, might be a bit of config
      html
      emacs-lisp
+
+     (elixir :variables
+             elixir-backend 'lsp
+             elixir-ls-path "/home/ckwilson/lib/elixir-ls/release")
 
      (javascript :variables
                  javascript-backend 'lsp
@@ -60,6 +63,11 @@ values."
                  js2-basic-offset 2
                  js-indent-level 2
                  js2-mode-show-parse-errors nil)
+     ;; Ruby lsp is based entirely off yard docs and is shit for
+     ;; runtime introspection
+     (ruby :variables
+           ruby-backend 'robe
+           ruby-insert-encoding-magic-comment nil)
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier
@@ -73,6 +81,7 @@ values."
      java
 
      docker
+     systemd
      markdown
      csv
      org
@@ -89,7 +98,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
-   '()
+   '(exec-path-from-shell)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -170,7 +179,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 21
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -213,6 +222,7 @@ values."
    ;; If non nil the default layout name is displayed in the mode-line.
    ;; (default nil)
    dotspacemacs-display-default-layout nil
+   dotspacemacs-mode-line-theme 'spacemacs
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
@@ -352,6 +362,7 @@ you should place your code here."
   ;; cider error buffer is a noisy pain, need to find a way
   ;; to show only in minibuffer, but until then, don't steal focus
   (setq cider-auto-select-error-buffer nil)
+  (exec-path-from-shell-initialize)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -384,9 +395,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(direnv-show-paths-in-summary nil)
  '(evil-want-Y-yank-to-eol nil)
+ '(highlight-parentheses-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
  '(package-selected-packages
    (quote
-    (systemd csv-mode direnv drag-stuff web-beautify livid-mode skewer-mode simple-httpd js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections multiple-cursors paredit yasnippet cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help org-projectile org-pomodoro alert log4e magit-gitflow evil-magit unfill smeargle orgit org-category-capture org-present gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-popup htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit git-commit with-editor transient spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent ace-window ace-link avy))))
+    (yaml-mode csv-mode direnv drag-stuff web-beautify livid-mode skewer-mode simple-httpd js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections multiple-cursors paredit yasnippet cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a dockerfile-mode docker tablist json-mode docker-tramp json-snatcher json-reformat xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help org-projectile org-pomodoro alert log4e magit-gitflow evil-magit unfill smeargle orgit org-category-capture org-present gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-popup htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md magit git-commit with-editor transient spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
