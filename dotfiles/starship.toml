@@ -1,0 +1,117 @@
+# Starship configuration
+# Location: ~/.config/starship.toml
+#
+# INSTALL: mkdir -p ~/.config && cp starship.toml ~/.config/
+#
+# Docs: https://starship.rs/config/
+
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Timeout for commands (ms) - increase if git is slow on large repos
+command_timeout = 1000
+
+# Prompt format - single line, informative but minimal
+format = """
+$directory\
+$git_branch\
+$git_status\
+$custom\
+$cmd_duration\
+$character"""
+
+# Right prompt - optional, shows less critical info
+right_format = """$time"""
+
+# ---------------------------------------------------------
+# Directory
+# ---------------------------------------------------------
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "blue bold"
+
+# ---------------------------------------------------------
+# Git - the essentials
+# ---------------------------------------------------------
+[git_branch]
+format = "[$branch]($style) "
+style = "purple"
+
+[git_status]
+disabled = true
+
+# ---------------------------------------------------------
+# Command duration
+# ---------------------------------------------------------
+[cmd_duration]
+min_time = 100  # milliseconds
+format = "[$duration]($style) "
+style = "yellow"
+
+# ---------------------------------------------------------
+# Prompt character - changes color on error
+# ---------------------------------------------------------
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+# ---------------------------------------------------------
+# Time (right side) - optional, comment out if not wanted
+# ---------------------------------------------------------
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "dimmed white"
+time_format = "%H:%M"
+
+# ---------------------------------------------------------
+# Jujutsu (jj) - custom module for when you start using it
+# Uncomment when ready. Requires jj to be installed.
+# ---------------------------------------------------------
+# [custom.jj]
+# description = "Jujutsu change ID"
+# command = "jj log --ignore-working-copy --no-graph -r @ -T 'change_id.shortest(4)' 2>/dev/null"
+# when = "test -d .jj || jj root 2>/dev/null"
+# format = "[jj:$output]($style) "
+# style = "cyan"
+
+# ---------------------------------------------------------
+# Language versions - disabled by default for speed
+# Uncomment what you actually need
+# ---------------------------------------------------------
+[nodejs]
+disabled = true
+
+[python]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+# ---------------------------------------------------------
+# Cloud/container context - useful, low overhead
+# ---------------------------------------------------------
+[gcloud]
+disabled = true  # enable if you want to see active gcloud project
+
+[aws]
+disabled = true
+
+[kubernetes]
+disabled = true  # enable if you kubectl a lot
+
+# ---------------------------------------------------------
+# Hostname/username - only show in SSH sessions
+# ---------------------------------------------------------
+[hostname]
+ssh_only = true
+format = "[$hostname]($style):"
+
+[username]
+show_always = false
+format = "[$user]($style)@"

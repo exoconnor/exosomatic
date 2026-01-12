@@ -1,0 +1,107 @@
+# Starship-based zshrc for macOS
+# Lightweight, fast, jj-ready
+#
+# INSTALL (run these once):
+#   brew install starship
+#   brew install atuin        # (if you want to keep atuin)
+#   # Copy this file: cp ~/.zshrc.starship ~/.zshrc
+#   # Create starship config: mkdir -p ~/.config && cp starship.toml ~/.config/
+#
+# Optional for nerd font icons:
+#   brew tap homebrew/cask-fonts
+#   brew install font-meslo-lg-nerd-font
+#
+# ---------------------------------------------------------
+
+# History - keep your existing settings
+HISTFILE=~/.zsh_history
+HISTSIZE=9001
+SAVEHIST=9001
+setopt BANG_HIST
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+# Editor
+export EDITOR="vim"
+export GIT_EDITOR="vim"
+
+# Useful aliases
+alias lt='du -sh * | sort -h'
+alias ls='ls -G'
+alias la='ls -la'
+alias ll='ls -l'
+
+# ---------------------------------------------------------
+# Completions (replaces omz completion system)
+# ---------------------------------------------------------
+autoload -Uz compinit
+# Speed up compinit by only checking cache once a day
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# Case-insensitive completion (like your HYPHEN_INSENSITIVE setting)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+
+# ---------------------------------------------------------
+# Keybindings
+# ---------------------------------------------------------
+bindkey -e  # emacs mode
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '^[[A' history-beginning-search-backward  # up arrow
+bindkey '^[[B' history-beginning-search-forward   # down arrow
+
+# ---------------------------------------------------------
+# Tool initialization (keep what you need)
+# ---------------------------------------------------------
+
+# NVM (lazy-load for faster startup)
+export NVM_DIR="$HOME/.nvm"
+# Lazy load nvm - only initialize when first called
+nvm() {
+  unset -f nvm node npm npx
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+  nvm "$@"
+}
+node() { nvm use default >/dev/null 2>&1; command node "$@"; }
+npm() { nvm use default >/dev/null 2>&1; command npm "$@"; }
+npx() { nvm use default >/dev/null 2>&1; command npx "$@"; }
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Terraform completion
+autoload -U +X bashcompinit && bashcompinit
+[[ -f /usr/local/bin/terraform ]] && complete -o nospace -C /usr/local/bin/terraform terraform
+
+# Google Cloud SDK
+[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ] && . "$HOME/google-cloud-sdk/path.zsh.inc"
+[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && . "$HOME/google-cloud-sdk/completion.zsh.inc"
+
+# Atuin (better shell history - optional, remove if not using)
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
+command -v atuin &>/dev/null && eval "$(atuin init zsh)"
+
+# Claude CLI
+alias claude="$HOME/.claude/local/claude"
+
+# Uv/rye python tooling
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+# ---------------------------------------------------------
+# Starship prompt - the main event
+# ---------------------------------------------------------
+eval "$(starship init zsh)"
